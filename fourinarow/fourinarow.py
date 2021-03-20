@@ -51,7 +51,6 @@ class FPR:
     def play(self):
         turn = 0
         board = self.board
-        N = self.N
         while self.winner() == 0:
             if turn%2 == 0:
                 player = 1
@@ -59,13 +58,19 @@ class FPR:
                 player = -1
             print(board)
             move = int(input(f"make a move bitch (player {player})")) - 1
-            for i in range(7, -1, -1):
-                if board[i, move] == 0:
-                    board[i, move] = player
-                    break
-            turn += 1;
+            self.make_a_move(player, move)
+            turn += 1
         print(board)
         print("WINNER!!!! ", self.winner())
+
+    def make_a_move(self, player, move):
+        board = self.board
+        for i in range(7, -1, -1):
+            if board[i, move] == 0:
+                board[i, move] = player
+                break
+
+        
 
 if __name__ == "__main__":
     fpr = FPR(8)
